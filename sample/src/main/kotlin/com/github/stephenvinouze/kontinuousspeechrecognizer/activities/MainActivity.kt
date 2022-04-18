@@ -10,6 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import com.github.stephenvinouze.core.interfaces.RecognitionCallback
 import com.github.stephenvinouze.core.managers.KontinuousRecognitionManager
 import com.github.stephenvinouze.core.models.RecognitionStatus
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
         /**
          * Put any keyword that will trigger the speech recognition
          */
-        private const val ACTIVATION_KEYWORD = "OK test"
+        private const val ACTIVATION_KEYWORD = "one"
         private const val RECORD_AUDIO_REQUEST_CODE = 101
     }
 
@@ -41,6 +43,10 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), RECORD_AUDIO_REQUEST_CODE)
+        }
+
+        button1.setOnClickListener(){
+            Toast.makeText(this, "button1 Clicked!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -137,6 +143,7 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
     override fun onKeywordDetected() {
         Log.i("Recognition","keyword detected !!!")
         textView.text = "Keyword detected"
+        button1.performClick();
     }
 
     override fun onPartialResults(results: List<String>) {}
