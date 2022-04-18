@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import com.github.stephenvinouze.core.interfaces.RecognitionCallback
 import com.github.stephenvinouze.core.managers.KontinuousRecognitionManager
@@ -46,8 +45,21 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
         }
 
         button1.setOnClickListener(){
-            Toast.makeText(this, "button1 Clicked!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ONE!", Toast.LENGTH_SHORT).show()
         }
+
+        button2.setOnClickListener(){
+            Toast.makeText(this, "TWO!", Toast.LENGTH_SHORT).show()
+        }
+
+        button3.setOnClickListener(){
+            Toast.makeText(this, "THREE!", Toast.LENGTH_SHORT).show()
+        }
+
+        button4.setOnClickListener(){
+            Toast.makeText(this, "FOUR!", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onDestroy() {
@@ -140,10 +152,28 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
         }
     }
 
-    override fun onKeywordDetected() {
+    override fun onKeyword1Detected() {
         Log.i("Recognition","keyword detected !!!")
         textView.text = "Keyword detected"
         button1.performClick();
+    }
+
+    override fun onKeyword2Detected() {
+        Log.i("Recognition","keyword detected !!!")
+        textView.text = "Keyword detected"
+        button2.performClick();
+    }
+
+    override fun onKeyword3Detected() {
+        Log.i("Recognition","keyword detected !!!")
+        textView.text = "Keyword detected"
+        button3.performClick();
+    }
+
+    override fun onKeyword4Detected() {
+        Log.i("Recognition","keyword detected !!!")
+        textView.text = "Keyword detected"
+        button4.performClick();
     }
 
     override fun onPartialResults(results: List<String>) {}

@@ -9,7 +9,10 @@ import com.github.stephenvinouze.core.models.RecognitionStatus
 interface RecognitionCallback {
     fun onPrepared(status: RecognitionStatus)
     fun onBeginningOfSpeech()
-    fun onKeywordDetected()
+    fun onKeyword1Detected()
+    fun onKeyword2Detected()
+    fun onKeyword3Detected()
+    fun onKeyword4Detected()
     fun onReadyForSpeech(params: Bundle)
     fun onBufferReceived(buffer: ByteArray)
     fun onRmsChanged(rmsdB: Float)

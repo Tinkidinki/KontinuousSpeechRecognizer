@@ -141,10 +141,25 @@ class KontinuousRecognitionManager(
                 callback?.onResults(matches, scores)
                 stopRecognition()
             } else {
-                matches.firstOrNull { it.contains(other = activationKeyword, ignoreCase = true) }
+                matches.firstOrNull { it.contains(other = "one", ignoreCase = true) }
                         ?.let {
                             isActivated = true
-                            callback?.onKeywordDetected()
+                            callback?.onKeyword1Detected()
+                        }
+                matches.firstOrNull { it.contains(other = "two", ignoreCase = true) }
+                        ?.let {
+                            isActivated = true
+                            callback?.onKeyword2Detected()
+                        }
+                matches.firstOrNull { it.contains(other = "three", ignoreCase = true) }
+                        ?.let {
+                            isActivated = true
+                            callback?.onKeyword3Detected()
+                        }
+                matches.firstOrNull { it.contains(other = "four", ignoreCase = true) }
+                        ?.let {
+                            isActivated = true
+                            callback?.onKeyword4Detected()
                         }
                 startRecognition()
             }
