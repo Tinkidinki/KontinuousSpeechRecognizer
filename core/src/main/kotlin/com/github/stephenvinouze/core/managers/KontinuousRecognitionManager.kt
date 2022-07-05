@@ -69,15 +69,15 @@ class KontinuousRecognitionManager(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 val flag = if (mute) AudioManager.ADJUST_MUTE else AudioManager.ADJUST_UNMUTE
                 it.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, flag, 0)
-                it.adjustStreamVolume(AudioManager.STREAM_ALARM, flag, 0)
-                it.adjustStreamVolume(AudioManager.STREAM_MUSIC, flag, 0)
-                it.adjustStreamVolume(AudioManager.STREAM_RING, flag, 0)
+                // it.adjustStreamVolume(AudioManager.STREAM_ALARM, flag, 0)
+                // it.adjustStreamVolume(AudioManager.STREAM_MUSIC, flag, 0)
+                // it.adjustStreamVolume(AudioManager.STREAM_RING, flag, 0)
                 it.adjustStreamVolume(AudioManager.STREAM_SYSTEM, flag, 0)
             } else {
                 it.setStreamMute(AudioManager.STREAM_NOTIFICATION, mute)
-                it.setStreamMute(AudioManager.STREAM_ALARM, mute)
-                it.setStreamMute(AudioManager.STREAM_MUSIC, mute)
-                it.setStreamMute(AudioManager.STREAM_RING, mute)
+                // it.setStreamMute(AudioManager.STREAM_ALARM, mute)
+                // it.setStreamMute(AudioManager.STREAM_MUSIC, mute)
+                // it.setStreamMute(AudioManager.STREAM_RING, mute)
                 it.setStreamMute(AudioManager.STREAM_SYSTEM, mute)
             }
         }
@@ -136,34 +136,41 @@ class KontinuousRecognitionManager(
         val matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
         val scores = results.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES)
         if (matches != null) {
-            if (isActivated) {
-                isActivated = false
-                callback?.onResults(matches, scores)
-                stopRecognition()
-            } else {
-                matches.firstOrNull { it.contains(other = "one", ignoreCase = true) }
-                        ?.let {
-                            isActivated = true
-                            callback?.onKeyword1Detected()
-                        }
-                matches.firstOrNull { it.contains(other = "two", ignoreCase = true) }
-                        ?.let {
-                            isActivated = true
-                            callback?.onKeyword2Detected()
-                        }
-                matches.firstOrNull { it.contains(other = "three", ignoreCase = true) }
-                        ?.let {
-                            isActivated = true
-                            callback?.onKeyword3Detected()
-                        }
-                matches.firstOrNull { it.contains(other = "four", ignoreCase = true) }
-                        ?.let {
-                            isActivated = true
-                            callback?.onKeyword4Detected()
-                        }
-                startRecognition()
-            }
+            matches.firstOrNull { it.contains(other = "again", ignoreCase = true) }
+                    ?.let {
+                        isActivated = true
+                        callback?.onKeyword1Detected()
+                    }
+            matches.firstOrNull { it.contains(other = "hard", ignoreCase = true) }
+                    ?.let {
+                        isActivated = true
+                        callback?.onKeyword2Detected()
+                    }
+            matches.firstOrNull { it.contains(other = "good", ignoreCase = true) }
+                    ?.let {
+                        isActivated = true
+                        callback?.onKeyword3Detected()
+                    }
+            matches.firstOrNull { it.contains(other = "easy", ignoreCase = true) }
+                    ?.let {
+                        isActivated = true
+                        callback?.onKeyword4Detected()
+                    }
+            matches.firstOrNull { it.contains(other = "answer", ignoreCase = true) }
+                ?.let {
+                    isActivated = true
+                    callback?.onKeyword5Detected()
+                }
+            matches.firstOrNull { it.contains(other = "next", ignoreCase = true) }
+                ?.let {
+                    isActivated = true
+                    callback?.onKeyword6Detected()
+                }
+
+            startRecognition()
+
+
         }
     }
-
 }
+

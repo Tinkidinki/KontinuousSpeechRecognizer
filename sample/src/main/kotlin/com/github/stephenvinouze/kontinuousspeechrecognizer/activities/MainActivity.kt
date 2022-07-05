@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        progressBar.visibility = View.INVISIBLE
-        progressBar.max = 10
 
         recognitionManager.createRecognizer()
 
@@ -45,19 +43,27 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
         }
 
         button1.setOnClickListener(){
-            Toast.makeText(this, "ONE!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "AGAIN!", Toast.LENGTH_SHORT).show()
         }
 
         button2.setOnClickListener(){
-            Toast.makeText(this, "TWO!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "HARD!", Toast.LENGTH_SHORT).show()
         }
 
         button3.setOnClickListener(){
-            Toast.makeText(this, "THREE!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "GOOD!", Toast.LENGTH_SHORT).show()
         }
 
         button4.setOnClickListener(){
-            Toast.makeText(this, "FOUR!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "EASY!", Toast.LENGTH_SHORT).show()
+        }
+
+        button5.setOnClickListener(){
+            Toast.makeText(this, "ANSWER!", Toast.LENGTH_SHORT).show()
+        }
+
+        button6.setOnClickListener(){
+            Toast.makeText(this, "NEXT!", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -81,14 +87,12 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
     }
 
     private fun startRecognition() {
-        progressBar.isIndeterminate = false
-        progressBar.visibility = View.VISIBLE
+
         recognitionManager.startRecognition()
     }
 
     private fun stopRecognition() {
-        progressBar.isIndeterminate = true
-        progressBar.visibility = View.INVISIBLE
+
         recognitionManager.stopRecognition()
     }
 
@@ -132,7 +136,7 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
     }
 
     override fun onRmsChanged(rmsdB: Float) {
-        progressBar.progress = rmsdB.toInt()
+        Log.i("Recognition","onRmsChanged")
     }
 
     override fun onPrepared(status: RecognitionStatus) {
@@ -174,6 +178,18 @@ class MainActivity : AppCompatActivity(), RecognitionCallback {
         Log.i("Recognition","keyword detected !!!")
         textView.text = "Keyword detected"
         button4.performClick();
+    }
+
+    override fun onKeyword5Detected() {
+        Log.i("Recognition","keyword detected !!!")
+        textView.text = "Keyword detected"
+        button5.performClick();
+    }
+
+    override fun onKeyword6Detected() {
+        Log.i("Recognition","keyword detected !!!")
+        textView.text = "Keyword detected"
+        button6.performClick();
     }
 
     override fun onPartialResults(results: List<String>) {}

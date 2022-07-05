@@ -13,6 +13,8 @@ interface RecognitionCallback {
     fun onKeyword2Detected()
     fun onKeyword3Detected()
     fun onKeyword4Detected()
+    fun onKeyword5Detected()
+    fun onKeyword6Detected()
     fun onReadyForSpeech(params: Bundle)
     fun onBufferReceived(buffer: ByteArray)
     fun onRmsChanged(rmsdB: Float)
